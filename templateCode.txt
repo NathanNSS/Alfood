@@ -1,0 +1,164 @@
+//Rotas
+{/* código omitido */ }
+        <Route path="restaurantes" element={<Restaurantes />} />
+        <Route path="restaurantes/novo" element={<FormRestaurante />} />
+        <Route path="restaurantes/:id" element={<FormRestaurante />} />
+{/* código omitido */ }
+
+//Form
+import { Box, Typography, TextField, Button } from '@mui/material';
+import { Method } from 'axios';
+import { SyntheticEvent, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import http from '../../../http';
+import IRestaurante from '../../../interfaces/IRestaurante';
+
+const FormRestaurante = () => {
+  const params = useParams();
+  const [nome, setNome] = useState('')
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (params.id) {
+      http.get<IRestaurante>(`/v2/restaurantes/${params.id}/`)
+        .then(resposta => setNome(resposta.data.nome))
+    }
+  }, [params])
+
+  const aoSubmeterForm = (evento: SyntheticEvent) => {
+    evento.preventDefault()
+    let url = '/v2/restaurantes/'
+    let method: Method = 'POST'
+    if (params.id) {
+      method = 'PUT'
+      url += `${params.id}/`
+    }
+    http.request({
+      url,
+      method,
+      data: {
+        nome
+      }
+    }).then(() => {
+      navigate('/dashboard/restaurantes')
+    })
+  }
+
+  return (
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h6">
+          Formulário de restaurante
+        </Typography>
+        <Box component="form" sx={{ mt: 1 }} onSubmit={aoSubmeterForm}>
+          <TextField
+            required
+            value={nome}
+            onChange={evento => setNome(evento.target.value)}
+            margin='dense'
+            id="nome"
+            label="Nome"
+            type="text"
+            fullWidth />
+          <Button type='submit' fullWidth variant="contained">Salvar</Button>
+        </Box>
+      </Box>
+    </>
+  );
+}
+
+export default FormRestaurante
+
+//Lista
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import IRestaurante from '../../../interfaces/IRestaurante';
+import { Grid, IconButton, Link, Typography } from '@mui/material';
+import { Delete, Edit } from '@mui/icons-material';
+import { Link as RouterLink } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import http from '../../../http';
+
+const Restaurantes = () => {
+  const [restaurantes, setRestaurantes] = useState<IRestaurante[]>()
+  useEffect(() => {
+    http.get<IRestaurante[]>('/v2/restaurantes/')
+      .then(resposta => setRestaurantes(resposta.data))
+  }, [])
+  const remover = (restaurante: IRestaurante) => {
+    http.delete(`/v2/restaurantes/${restaurante.id}/`)
+      .then(() => {
+        if (restaurantes) {
+          setRestaurantes([
+            ...restaurantes.filter(x => x.id !== restaurante.id)
+          ])
+        }
+      })
+  }
+  return (
+    <>
+      <Grid container>
+        <Grid item xs>
+          <Typography component="h1" variant="h6">
+            Restaurantes
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Link
+            variant="button"
+            component={RouterLink}
+            to="/dashboard/restaurantes/novo"
+          >
+            Novo
+          </Link>
+        </Grid>
+      </Grid>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Nome</TableCell>
+              <TableCell colSpan={2}>Ações</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {restaurantes?.map((restaurante) => (
+              <TableRow key={restaurante.id}>
+                <TableCell>
+                  {restaurante.nome}
+                </TableCell>
+                <TableCell>
+                  <Link
+                    variant="button"
+                    component={RouterLink}
+                    to={`/dashboard/restaurantes/${restaurante.id}`}
+                  >
+                    <IconButton aria-label="editar">
+                      <Edit />
+                    </IconButton>
+                  </Link>
+                  <IconButton aria-label="deletar" onClick={() => remover(restaurante)}>
+                    <Delete />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
+  );
+}
+
+export default Restaurantes

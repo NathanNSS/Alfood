@@ -1,33 +1,39 @@
-![Integrando seu projeto React com APIs](thumbnail.png)
+<h1 align="center">Alfood</h1>
 
-# Alfood
+<p align="center">
+  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=0d47a1&labelColor=000000">
+</p>
+ 
+<img src="AppShowcase/screencapture.png" alt="Imagem do Alfood" width="100%">
 
-O Alfood é um site que lista restaurantes e pratos do menu. 
-É um MVP que tá só começando e ainda tem muitas funcionalidades novas para serem desenvolvidas.
-
-<img src="screencapture.png" alt="Imagem do Alfood" width="50%">
+<br>
 
 
-## 🔨 Funcionalidades do projeto
+## 💻 Projeto
 
-O Alfood começa com uma listagem estática de seu conteúdo e é esse o problema que queremos resolver.
-No decorrer do curso, vamos implementar toda a camada de comunicação com a API.
+O <b>Alfood</b> é um site que lista restaurantes e pratos do menu. foi desenvolvido durante o curso da alura React: <b>Integrando seu projeto React com APIs</b>
 
-## ✔️ Técnicas e tecnologias utilizadas
+## ✨ Tecnologias
 
-Se liga nessa lista de tudo que usaremos nesse treinamento:
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- `React`
-- `React Hooks`
-- `TypeScript`
-- `axios`
+- [NodeJS](https://nodejs.orgen/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
+- [Mui](https://mui.com/)
+- [Axios](https://axios-http.com/)
+- [React](https://reactjs.org/)
+- [React Router](https://reactrouter.com/docs/en/v6)
+- [SASS](https://sass-lang.com/)
 
-## 🛠️ Abrir e rodar o projeto
+## 🚀 Como executar
 
-Para abrir e rodar o projeto, execute npm i para instalar as dependências e npm start para inicar o projeto.
+- Clone o repositório
+- Rode `npm install` para instalar as dependências
+- Rode o `npm start` para iniciar a aplicação na porta <b>3000</b>
+- Por fim, o <b>Alfood</b> estará disponível em `http://localhost:3000`
 
-Depois, acesse <a href="http://localhost:3000/">http://localhost:3000/</a> no seu navegador.
 
-## 📚 Mais informações do curso
+## 📄 Licença
 
-Busque na plataforma da Alura o curso **Integrando seu projeto React com APIs** publicado na Escola Frontend.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
