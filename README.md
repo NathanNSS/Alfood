@@ -16,7 +16,7 @@ O <b>Alfood</b> é um site que lista restaurantes e pratos do menu. foi desenvol
 ## ✨ Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
-
+>web
 - [NodeJS](https://nodejs.orgen/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
@@ -25,6 +25,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [React](https://reactjs.org/)
 - [React Router](https://reactrouter.com/docs/en/v6)
 - [SASS](https://sass-lang.com/)
+>API 
+
+***Obs API não foi feita por mim**
+- [Python](https://www.python.org/)
+- [Docker](https://www.docker.com/)
 
 ## 🚀 Como executar
 
